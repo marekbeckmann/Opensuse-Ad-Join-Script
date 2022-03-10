@@ -25,6 +25,8 @@ Realm: $realm
 Homedir: $homedir [/home/%u@%d]
 Default Shell: $shell [/bin/bash]
 Joined with: $adminuser
+
+Please note, that for the changes to take effect, you might have to reboot your system!
 "
 }
 
@@ -53,7 +55,6 @@ function adJoin() {
         sed -i "/.*pam_mkhomedir.so.*/ s/$/ umask=${umask}/" /etc/pam.d/common-session
     fi
     systemctl restart nscd.service
-    id "$adminuser" || logToScreen "AD Join failed" --error
     if [[ -n "$permUser" ]]; then
         IFS=',' read -ra ADDR <<<"$permUser"
         for i in "${ADDR[@]}"; do
