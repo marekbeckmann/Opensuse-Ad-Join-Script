@@ -52,6 +52,7 @@ function adJoin() {
     if [[ -n "$umask" ]]; then
         sed -i "/.*pam_mkhomedir.so.*/ s/$/ umask=${umask}/" /etc/pam.d/common-session
     fi
+    systemctl restart nscd.service
     id "$adminuser" || logToScreen "AD Join failed" --error
     if [[ -n "$permUser" ]]; then
         IFS=',' read -ra ADDR <<<"$permUser"
