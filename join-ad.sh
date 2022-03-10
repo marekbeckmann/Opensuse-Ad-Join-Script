@@ -30,7 +30,7 @@ Joined with: $adminuser
 
 function installPackages() {
     zypper refresh
-    zypper in -yl install realmd adcli sssd sssd-ldap sssd-ad sssd-tools || logToScreen "Couldn't install Packages!" --error
+    zypper in -yl realmd adcli sssd sssd-ldap sssd-ad sssd-tools || logToScreen "Couldn't install Packages!" --error
 }
 
 function adJoin() {
