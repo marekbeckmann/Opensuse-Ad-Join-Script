@@ -1,0 +1,1 @@
+# Opensuse-Ad-Join-Script
