@@ -29,13 +29,8 @@ Joined with: $adminuser
 }
 
 function installPackages() {
-    apt -y update
-    apt -y install realmd sssd sssd-tools sssd-ad libnss-sss libpam-sss adcli samba-common-bin packagekit libpam-google-authenticator || logToScreen "Couldn't install Packages!" --error
-    systemctl stop sssd
-    cp /usr/lib/x86_64-linux-gnu/sssd/conf/sssd.conf /etc/sssd/.
-    chmod 600 /etc/sssd/sssd.conf
-    systemctl enable sssd
-    systemctl start sssd
+    zypper refresg
+    zypper in -y install realmd adcli sssd sssd-ldap sssd-ad sssd-tools || logToScreen "Couldn't install Packages!" --error
 }
 
 function adJoin() {
@@ -52,7 +47,8 @@ function adJoin() {
     sed -i '/use_fully_qualified_names/d' /etc/sssd/sssd.conf
     echo "use_fully_qualified_names = False" | tee -a /etc/sssd/sssd.conf
     systemctl restart sssd
-    pam-auth-update --enable mkhomedir --force
+    pam-config -a --sss
+    pam-config -a --mkhomedir
     if [[ -n "$umask" ]]; then
         sed -i "/.*pam_mkhomedir.so.*/ s/$/ umask=${umask}/" /etc/pam.d/common-session
     fi
@@ -110,7 +106,7 @@ You can use the following Options:
   [-a] [--allow-user] => Allow user(s) (comma seperated)
   [-r] [--allow-group] => Allow group(s) (comma seperated)
   [-e] [--enable-sudo] => Allow user(s) to have root privileges (SUDO)
-More Documentation can be found on Github: https://github.com/marekbeckmann/debian-ad-join-script"
+More Documentation can be found on Github: https://github.com/marekbeckmann/opensuse-ad-join-script"
 }
 
 function getParams() {
