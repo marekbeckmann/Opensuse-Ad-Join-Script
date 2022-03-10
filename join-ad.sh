@@ -29,7 +29,7 @@ Joined with: $adminuser
 }
 
 function installPackages() {
-    zypper refresg
+    zypper refresh
     zypper in -yl install realmd adcli sssd sssd-ldap sssd-ad sssd-tools || logToScreen "Couldn't install Packages!" --error
 }
 
