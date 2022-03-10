@@ -86,7 +86,7 @@ function logToScreen() {
 
 function enableSudo {
 if [[ -n "$sudoUsers" ]]; then
-        sed -ei '/Defaults targetpw/ s/^#*/#/' /etc/sudoers
+        sed -e '/Defaults targetpw/ s/^#*/#/' /etc/sudoers -i
         IFS=',' read -ra ADDR <<<"$sudoUsers"
         for i in "${ADDR[@]}"; do
             tee /etc/sudoers.d/adm_"$i" >/dev/null <<EOT
