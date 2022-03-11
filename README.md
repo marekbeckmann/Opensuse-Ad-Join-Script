@@ -19,17 +19,17 @@ sudo ./join-ad.sh
 You can run the script with the following parameters: 
 
 
-| Option | Description |
-|--|--|
-| `-h` `--help` | Prints help message, that shows all options and a short description |
-| `-d` `--ad-domain` `<domain>` | Specifies domain to join |
-| `-u` `--admin-user` `<userName>` | Specifies privileged user for AD join |
-| `-p` `--homedir` `<directory>` | Overrides home directory for SSSD config (Defaults to `/home/%u@%d`) |
-| `-s` `--shell` `<shell>`| Overrides shell for SSSD config |
-| `-m` `--umask` `<umask>` | Specify UMASK for the homedir of users |
-| `-a` `--allow-user` `<user1,user2>` | Allow user(s) (comma seperated) |
-| `-r` `--allow-group` `<group1,group2>` | Allow group(s) (comma seperated) |
-| `-e` `--enable-sudo` `<user1,user2>` | Allow user(s) to have root privileges (SUDO) |
+| Option                                 | Description                                                          |
+| -------------------------------------- | -------------------------------------------------------------------- |
+| `-h` `--help`                          | Prints help message, that shows all options and a short description  |
+| `-d` `--ad-domain` `<domain>`          | Specifies domain to join                                             |
+| `-u` `--admin-user` `<userName>`       | Specifies privileged user for AD join                                |
+| `-p` `--homedir` `<directory>`         | Overrides home directory for SSSD config (Defaults to `/home/%u@%d`) |
+| `-s` `--shell` `<shell>`               | Overrides shell for SSSD config                                      |
+| `-m` `--umask` `<umask>`               | Specify UMASK for the homedir of users                               |
+| `-a` `--allow-user` `<user1,user2>`    | Allow user(s) (comma seperated)                                      |
+| `-r` `--allow-group` `<group1,group2>` | Allow group(s) (comma seperated)                                     |
+| `-e` `--enable-sudo` `<user1,user2>`   | Allow user(s) to have root privileges (SUDO)                         |
 
 
 **Example:**
