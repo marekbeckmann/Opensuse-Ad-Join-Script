@@ -36,6 +36,8 @@ function installPackages() {
 }
 
 function adJoin() {
+    logToScreen "Waiting 5s ..."
+    sleep 5
     logToScreen "Do you want to join the following REALM? To proceed, enter your credentials"
     realm discover "$realm" || logToScreen "Can't discover realm" --error
     realm join "$realm" -U "$adminuser" || logToScreen "Can't join AD" --error

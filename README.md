@@ -34,6 +34,6 @@ You can run the script with the following parameters:
 
 **Example:**
 ```
-sudo ./join-ad.sh  -u "admUser" -d "ad.your-company.org" -p "/home/%d/%u" -s "/bin/bash" -s "/bin/bash" -m "0077" -r "admins"
+bash join-ad.sh --adminuser Admin --ad-domain ad.example.org --homedir /home/%d/%u --shell /bin/bash --umask 0077 --allow-group Admins --enable-sudo Admin
 ```
-This will join the ad (realm ad.your-company.org), using the privileged user `admUser`and setting the home directory for new users to `/home/ad.your-company.org/userName` and overriding the shell for every user to `/bin/bash`
+This will join the ad (realm ad.example.org), using the privileged user `Admin`and setting the home directory for new users to `/home/ad.example.org/userName` and overriding the shell for every user to `/bin/bash` aswell as granting the user `Admin`  `sudo` priviliges.
