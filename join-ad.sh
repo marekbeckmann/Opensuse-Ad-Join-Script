@@ -117,6 +117,7 @@ function getParams() {
         case "$1" in
         -h | --help)
             helpMsg
+            exit 0
             ;;
         -u | --adminuser)
             adminuser="$2"
