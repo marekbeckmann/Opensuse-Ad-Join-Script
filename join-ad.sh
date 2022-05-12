@@ -49,10 +49,16 @@ function adJoin() {
         echo "default_shell = $shell" | tee -a /etc/sssd/sssd.conf
     fi
     sed -i '/use_fully_qualified_names/d' /etc/sssd/sssd.conf
+    sed -i '/ldap_id_mapping/d' /etc/sssd/sssd.conf
+    sed -i '/access_provider/d' /etc/sssd/sssd.conf
     echo "use_fully_qualified_names = False" | tee -a /etc/sssd/sssd.conf
+    echo "ldap_id_mapping = False" | tee -a /etc/sssd/sssd.conf
+    echo "access_provider = simple" | tee -a /etc/sssd/sssd.conf
     systemctl restart sssd
     pam-config -a --sss
-    pam-config -a --mkhomedir
+    if [[ -z "$mkhomedir" ]];then
+        pam-config -a --mkhomedir
+    fi
     if [[ -n "$umask" ]]; then
         sed -i "/.*pam_mkhomedir.so.*/ s/$/ umask=${umask}/" /etc/pam.d/common-session
     fi
@@ -108,6 +114,7 @@ You can use the following Options:
   [-p] [--homedir] => Overrides the home directory path
   [-s] [--shell] => Overrides the default shell
   [-m] [--umask] => Specify UMASK for the homedir of users
+  [-n] [--no-mkhomedir] => Disable automatic creation of home directories
   [-a] [--allow-user] => Allow user(s) (comma seperated)
   [-r] [--allow-group] => Allow group(s) (comma seperated)
   [-e] [--enable-sudo] => Allow user(s) to have root privileges (SUDO)
@@ -135,6 +142,9 @@ function getParams() {
             ;;
         -m | --umask)
             umask="$2"
+            ;;
+        -n | --no-mkhomedir)
+            mkhomedir=false
             ;;
         -a | --allow-user)
             permUser="$2"
